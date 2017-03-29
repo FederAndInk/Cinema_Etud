@@ -3,3 +3,7 @@ nbproject
 .classpath
 .project
 build.xml
+${test.src.dir}
+test
+
+src/films\.db

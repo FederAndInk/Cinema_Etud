@@ -12,6 +12,20 @@ public class Role {
     private Film   film;
     private Acteur acteur;
     
+    // -------------------Constructors------------------------
+    
+    
+    /**
+     * @author nihil
+     *
+     * @param nomRole
+     * @param film
+     */
+    public Role(String nomRole, Film film) {
+	setNomRole(nomRole);
+	setFilm(film);
+    }
+    
     
     // -------------------Getters&Setters------------------------
     /**

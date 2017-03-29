@@ -21,9 +21,10 @@ public class Role {
      * @param nomRole
      * @param film
      */
-    public Role(String nomRole, Film film) {
+    public Role(String nomRole, Film film, Acteur acteur) {
 	setNomRole(nomRole);
 	setFilm(film);
+	setActeur(acteur);
     }
     
     

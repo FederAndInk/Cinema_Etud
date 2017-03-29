@@ -3,13 +3,17 @@
  */
 package cinema;
 
+import java.io.Serializable;
+
+
+
 /**
  * @author nihil
  *
  */
-public class Role {
-    private String nomRole;
+public class Role implements Comparable<Role>, Serializable {
     private Film   film;
+    private String nomRole;
     private Acteur acteur;
     
     // -------------------Constructors------------------------
@@ -21,10 +25,21 @@ public class Role {
      * @param nomRole
      * @param film
      */
-    public Role(String nomRole, Film film, Acteur acteur) {
-	setNomRole(nomRole);
+    protected Role(Film film, String nomRole, Acteur acteur) {
 	setFilm(film);
+	setNomRole(nomRole);
 	setActeur(acteur);
+    }
+    
+    
+    // ----------------------Methods-----------------------------
+    
+    /**
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
+    @Override
+    public int compareTo(Role o) {
+	return getNomRole().compareTo(o.getNomRole());
     }
     
     

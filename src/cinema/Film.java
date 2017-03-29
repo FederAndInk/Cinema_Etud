@@ -5,76 +5,124 @@
  */
 package cinema;
 
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+
+
 
 /**
  *
  * @author culeta
  */
-public class Film implements java.io.Serializable {
-
-    private String nomFilm;
-    private String realisateur;
-    private Date dateSortie;
-    private ArrayList<Role> roles;
-
-    public Film(String nomFilm, Role role) {
-        this.setNomFilm(nomFilm);
-        addrole(role);
+public class Film implements java.io.Serializable, Comparable<Film> {
+    
+    private String		    nomFilm;
+    private String		    realisateur;
+    private static final DateFormat DF	    = new SimpleDateFormat("dd/mm/yyyy", Locale.FRANCE);
+    private static final DateFormat DF_SHOW = new SimpleDateFormat("d MMMM, yyyy", Locale.FRANCE);
+    private Date		    dateSortie;
+    private HashMap<String, Role>   roles;
+    
+    
+    public Film(String nomFilm, Acteur acteur, String role, String realisateur, Date dateSortie) {
+	setRoles(new HashMap<>());
+	setNomFilm(nomFilm);
+	setRealisateur(realisateur);
+	setDateSortie(dateSortie);
+	
+	addRole(new Role(this, role, acteur));
     }
-
-    public Film(String nomFilm, String realisateur, Date dateSortie, Role role) {
-        setDateSortie(dateSortie);
-        setNomFilm(nomFilm);
-        setRealisateur(realisateur);
+    
+    
+    // ----------------------Methods-----------------------------
+    
+    public void addRole(Role role) {
+	getRoles().put(role.getNomRole(), role);
+	role.getActeur().addRole(role);
     }
-
+    
+    
+    /**
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
+    @Override
+    public int compareTo(Film o) {
+	return getNomFilm().compareTo(o.getNomFilm());
+    }
+    
+    
+    /**
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+	return getNomFilm() + " par " + getRealisateur() + " sortie en salle le " + DF_SHOW.format(getDateSortie());
+    }
+    
+    
+    // -------------------Getters&Setters------------------------
+    
     public String getNomFilm() {
-        return nomFilm;
+	return nomFilm;
     }
-
+    
+    
     private void setNomFilm(String nomFilm) {
-        this.nomFilm = nomFilm;
+	this.nomFilm = nomFilm;
     }
-
+    
+    
     /**
      * @return the realisateur
      */
     public String getRealisateur() {
-        return realisateur;
+	return realisateur;
     }
-
+    
+    
     /**
-     * @param realisateur the realisateur to set
+     * @param realisateur
+     * the realisateur to set
      */
-    public void setRealisateur(String realisateur) {
-        this.realisateur = realisateur;
+    private void setRealisateur(String realisateur) {
+	this.realisateur = realisateur;
     }
-
+    
+    
     /**
      * @return the dateSortie
      */
     public Date getDateSortie() {
-        return dateSortie;
+	return dateSortie;
     }
-
+    
+    
     /**
-     * @param dateSortie the dateSortie to set
+     * @param dateSortie
+     * the dateSortie to set
      */
-    public void setDateSortie(Date dateSortie) {
-        this.dateSortie = dateSortie;
+    private void setDateSortie(Date dateSortie) {
+	this.dateSortie = dateSortie;
     }
-
-    public void addrole(Role role) {
-        roles.add(role);
+    
+    
+    /**
+     * @return the roles
+     */
+    public HashMap<String, Role> getRoles() {
+	return roles;
     }
-
-    public void afficheroles() {
-        for (Role role : roles) {
-            System.out.println(role.getNomRole());
-            System.out.println(role.getActeur().getNomActeur());
-        }
+    
+    
+    /**
+     * @param roles
+     * the roles to set
+     */
+    public void setRoles(HashMap<String, Role> roles) {
+	this.roles = roles;
     }
-
+    
 }

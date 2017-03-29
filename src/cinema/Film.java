@@ -5,18 +5,22 @@
  */
 package cinema;
 
+import java.util.Date;
+
 /**
  *
  * @author culeta
  */
 public class Film implements java.io.Serializable {
-	
+
     private String nomFilm;
-	
-    public Film(String nomFilm ) {
-	this.setNomFilm(nomFilm);
+    private String realisateur;
+    private Date dateSortie;
+
+    public Film(String nomFilm) {
+        this.setNomFilm(nomFilm);
     }
-    
+
     public String getNomFilm() {
         return nomFilm;
     }
@@ -25,7 +29,4 @@ public class Film implements java.io.Serializable {
         this.nomFilm = nomFilm;
     }
 
-    
 }
- 
-

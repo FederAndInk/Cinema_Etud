@@ -5,6 +5,7 @@
  */
 package cinema;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -12,25 +13,27 @@ import java.util.Date;
  * @author culeta
  */
 public class Film implements java.io.Serializable {
-    
+
     private String nomFilm;
     private String realisateur;
     private Date dateSortie;
-    
-    public Film(String nomFilm) {
+    private ArrayList<Role> roles;
+
+    public Film(String nomFilm, Role role) {
         this.setNomFilm(nomFilm);
+        addrole(role);
     }
-    
-    public Film(String nomFilm, String realisateur, Date dateSortie) {
+
+    public Film(String nomFilm, String realisateur, Date dateSortie, Role role) {
         setDateSortie(dateSortie);
         setNomFilm(nomFilm);
         setRealisateur(realisateur);
     }
-    
+
     public String getNomFilm() {
         return nomFilm;
     }
-    
+
     private void setNomFilm(String nomFilm) {
         this.nomFilm = nomFilm;
     }
@@ -62,5 +65,16 @@ public class Film implements java.io.Serializable {
     public void setDateSortie(Date dateSortie) {
         this.dateSortie = dateSortie;
     }
-    
+
+    public void addrole(Role role) {
+        roles.add(role);
+    }
+
+    public void afficheroles() {
+        for (Role role : roles) {
+            System.out.println(role.getNomRole());
+            System.out.println(role.getActeur().getNomActeur());
+        }
+    }
+
 }

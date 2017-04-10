@@ -24,6 +24,9 @@ public class Film implements java.io.Serializable, Comparable<Film> {
     private static final DateFormat DF	    = new SimpleDateFormat("dd/mm/yyyy", Locale.FRANCE);
     private static final DateFormat DF_SHOW = new SimpleDateFormat("d MMMM, yyyy", Locale.FRANCE);
     private Date		    dateSortie;
+    /**
+     * nomRole, Role
+     */
     private HashMap<String, Role>   roles;
     
     
@@ -38,7 +41,12 @@ public class Film implements java.io.Serializable, Comparable<Film> {
     
     
     // ----------------------Methods-----------------------------
-    
+    /**
+     * 
+     * @author nihil
+     * TODO : I think we should change nomRole to nomActeur
+     * @param role
+     */
     public void addRole(Role role) {
 	getRoles().put(role.getNomRole(), role);
 	role.getActeur().addRole(role);

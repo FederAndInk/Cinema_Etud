@@ -15,6 +15,9 @@ import jdk.nashorn.internal.objects.annotations.Setter;
 public class Acteur implements java.io.Serializable, Comparable<Acteur> {
     
     private String		  nomActeur;
+    /**
+     * nomFilm, Role
+     */
     private HashMap<String, Role> roles;
     
     

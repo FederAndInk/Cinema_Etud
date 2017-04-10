@@ -61,6 +61,7 @@ public class Appli {
     }
     
     
+    // TODO see if we can divide this in many other methods, and if we can create specifique exceptions :)
     /**
      * Enregistrement d'un nouveau film avec l'acteur principal
      * Un message de confimation est affiché à l'issue de la création.

@@ -24,6 +24,7 @@ public class Acteur implements java.io.Serializable, Comparable<Acteur> {
      * @author nihil
      *
      * @param nomActeur
+     * init nomActeur
      */
     public Acteur(String nomActeur) {
 	setNomActeur(nomActeur);
@@ -35,14 +36,14 @@ public class Acteur implements java.io.Serializable, Comparable<Acteur> {
     /**
      * 
      * @author nihil
-     *
+     * Only Call in the Film class, for unidirectional calling to add an actor to a movie
      * @param role
      */
     protected void addRole(Role role) {
 	try {
 	    String callerClassName = new Exception().getStackTrace()[1].getClassName();
 	    if (callerClassName == role.getFilm().getClass().getName()) {
-		roles.put(role.getFilm().getNomFilm(), role);
+		this.roles.put(role.getFilm().getNomFilm(), role);
 	    } else {
 		throw new IllegalAccessException(
 			callerClassName + " does not have access to this method, please use Film.addRole instead");
@@ -88,9 +89,14 @@ public class Acteur implements java.io.Serializable, Comparable<Acteur> {
     }
     
     
+    /**
+     * @author nihil
+     *
+     * @return the actor's name
+     */
     @Getter
     public String getNomActeur() {
-	return nomActeur;
+	return this.nomActeur;
     }
     
     
@@ -98,7 +104,7 @@ public class Acteur implements java.io.Serializable, Comparable<Acteur> {
      * @return the roles
      */
     public HashMap<String, Role> getRoles() {
-	return roles;
+	return this.roles;
     }
     
     

@@ -139,28 +139,33 @@ public class Appli {
         if (film == null) {
             System.out.println("Le film est inexisant :(");
         } else {
-            
-            System.out.println("Saisissez un acteur : ");
-            Acteur acteur = getActeur(sc.nextLine());
-            if (acteur == null) {// ---------------------acteur
-                System.out.println("L'acteur est inexistant :(");
-            } else {
-                
-                if (acteur.getRoles().containsKey(film.getNomFilm())) {
-                    System.out.println("L'acteur joue déjà dans le film :(");
-                } else {// --------------------role
+            Boolean continu = false;
+            do {
+                System.out.println("Saisissez un acteur : ");
+                Acteur acteur = getActeur(sc.nextLine());
+                if (acteur == null) {// ---------------------acteur
+                    System.out.println("L'acteur est inexistant :(");
+                } else {
                     
-                    System.out.println("Saisissez un role : ");
-                    String role = sc.nextLine();
-                    if (film.getRoles().containsKey(role)) {
-                        System.out.println("Le role est déjà pris :(");
-                    } else {// -------------toutes les conditions sont bonnes
-                        film.addRole(new Role(film, role, acteur));
-                        System.out.println(acteur.getNomActeur() + " à bien été ajouté au film " + film.getNomFilm()
-                                + " il joue dans le role de " + role);
+                    if (acteur.getRoles().containsKey(film.getNomFilm())) {
+                        System.out.println("L'acteur joue déjà dans le film :(");
+                    } else {// --------------------role
+                        
+                        System.out.println("Saisissez un role : ");
+                        String role = sc.nextLine();
+                        if (film.getRoles().containsKey(role)) {
+                            System.out.println("Le role est déjà pris :(");
+                        } else {// -------------toutes les conditions sont bonnes
+                            film.addRole(new Role(film, role, acteur));
+                            System.out.println(acteur.getNomActeur() + " à bien été ajouté au film " + film.getNomFilm()
+                                    + " il joue dans le role de " + role);
+                        } // end if
                     } // end if
-                } // end if
-            }
+                }
+                System.out.println("Voulez vous ajouter un autre acteur dans " + film.getNomFilm() + " ?(O/n)");
+                String will = sc.nextLine();
+                continu = (will.length() == 0 || will.equals("o") || will.equals("O"));
+            } while (continu);
         } // end if
     }
     

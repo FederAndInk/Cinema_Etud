@@ -5,5 +5,5 @@ nbproject
 build.xml
 ${test.src.dir}
 test
-
+build/
 src/films\.db

@@ -156,9 +156,8 @@ public class Appli {
 						System.out.println("Le role est déjà pris :(");
 					} else {// -------------toutes les conditions sont bonnes
 						film.addRole(new Role(film, role, acteur));
-						System.out.println(acteur.getNomActeur() + " à bien été ajouté au film "
-								+ film.getNomFilm() + " il joue dans le role de "
-								+ role);
+						System.out.println(acteur.getNomActeur() + " à bien été ajouté au film " + film.getNomFilm()
+								+ " il joue dans le role de " + role);
 					} // end if
 				} // end if
 			}
@@ -174,8 +173,7 @@ public class Appli {
 			Film film = iterator.next().getValue();
 			System.out.println(film);
 			for (Role role : film.getRoles().values()) {
-				System.out.println("  -> " + role.getNomRole() + " interpreté par "
-						+ role.getActeur().getNomActeur());
+				System.out.println("  -> " + role.getNomRole() + " interpreté par " + role.getActeur().getNomActeur());
 			}
 		} // end for
 	}

@@ -45,19 +45,25 @@ public class Appli {
      * Si l'acteur existe déjà, un message d'erreur est affiché
      */
     public void nouvelActeur() {
+        boolean continu;
         
-        Scanner sc = new Scanner(System.in); // TODO can we make this as a field ?
-        System.out.println("\nEnregistrement d'un acteur\n");
-        System.out.print("Nom de l'acteur :\t");
-        String nomActeur = sc.nextLine();
-        
-        if (getActeur(nomActeur) == null) {
-            Acteur acteur = new Acteur(nomActeur);
-            addActeur(acteur, nomActeur);
-            System.out.println("\n\tEnregistrement de l'acteur réalisé\n");
-        } else {
-            System.out.println("\n\tUn acteur de même nom existe déjà\n");
-        }
+        do {
+            Scanner sc = new Scanner(System.in); // TODO can we make this as a field ?
+            System.out.println("\nEnregistrement d'un acteur\n");
+            System.out.print("Nom de l'acteur :\t");
+            String nomActeur = sc.nextLine();
+            
+            if (getActeur(nomActeur) == null) {
+                Acteur acteur = new Acteur(nomActeur);
+                addActeur(acteur, nomActeur);
+                System.out.println("\n\tEnregistrement de l'acteur réalisé\n");
+            } else {
+                System.out.println("\n\tUn acteur de même nom existe déjà\n");
+            }
+            System.out.println("Voulez vous ajouter un autre acteur ?(O/n)");
+            String will = sc.nextLine();
+            continu = (will.length() == 0 || will.equals("o") || will.equals("O"));
+        } while (continu);
     }
     
     
@@ -71,7 +77,7 @@ public class Appli {
         
         Scanner sc = new Scanner(System.in);
         String inp;
-        String film = "";
+        String film;
         String realisateur;
         String role;
         Acteur acteur;
@@ -80,48 +86,55 @@ public class Appli {
         DateFormat df = new SimpleDateFormat("dd/mm/yyyy", Locale.FRANCE);
         Film filmTemp;
         boolean loop = false;
-        // --------------------------acteur
+        boolean continu;
+        
         do {
-            if (loop) {
-                System.out.println("acteur inexistant :(");
-            } // end if
-            System.out.println("Saisissez un acteur, entrer pour abandonner : ");
-            inp = sc.nextLine();
-            loop = true;
-        } while ((acteur = getActeur(inp)) == null && inp.length() > 0);
-        loop = false;
-        // --------------------------film
-        if (inp.length() > 0 && getActeur(inp) != null) {
+            film = "";
+            // --------------------------acteur
             do {
                 if (loop) {
-                    System.out.println("film déjà existant :(");
+                    System.out.println("acteur inexistant :(");
                 } // end if
-                System.out.println("Saisissez un film, entrer pour abandonner : ");
-                film = sc.nextLine();
+                System.out.println("Saisissez l'acteur principal, entrer pour abandonner : ");
+                inp = sc.nextLine();
                 loop = true;
-            } while ((filmTemp = getFilm(film)) != null && film.length() > 0);
-            // --------------------------role real date
-            if (film.length() > 0 && inp.length() > 0) {
-                System.out.println("Saisissez un role : ");
-                role = sc.nextLine();
-                
-                System.out.println("Saisissez un realisateur : ");
-                realisateur = sc.nextLine();
+            } while ((acteur = getActeur(inp)) == null && inp.length() > 0);
+            loop = false;
+            // --------------------------film
+            if (inp.length() > 0 && getActeur(inp) != null) {
                 do {
-                    System.out.println("Saisissez la date de sortie du film (jj/mm/aaaa) : ");
-                    dateS = sc.nextLine();
-                    try {
-                        date = df.parse(dateS);
-                        loop = false;
-                        addFilm(new Film(film, acteur, role, realisateur, date), film);
-                    } catch (ParseException e) {
-                        System.out.println("Date invalide");
-                        loop = true;
-                    }
-                } while (loop);
-            }
-        } // end if
-        
+                    if (loop) {
+                        System.out.println("film déjà existant :(");
+                    } // end if
+                    System.out.println("Saisissez le nom du film, entrer pour abandonner : ");
+                    film = sc.nextLine();
+                    loop = true;
+                } while ((filmTemp = getFilm(film)) != null && film.length() > 0);
+                // --------------------------role real date
+                if (film.length() > 0 && inp.length() > 0) {
+                    System.out.println("Saisissez le role principal : ");
+                    role = sc.nextLine();
+                    
+                    System.out.println("Saisissez un realisateur : ");
+                    realisateur = sc.nextLine();
+                    do {
+                        System.out.println("Saisissez la date de sortie du film (jj/mm/aaaa) : ");
+                        dateS = sc.nextLine();
+                        try {
+                            date = df.parse(dateS);
+                            loop = false;
+                            addFilm(new Film(film, acteur, role, realisateur, date), film);
+                        } catch (ParseException e) {
+                            System.out.println("Date invalide");
+                            loop = true;
+                        }
+                    } while (loop);
+                }
+            } // end if
+            System.out.println("Voulez vous ajouter un autre film ?(O/n)");
+            String will = sc.nextLine();
+            continu = (will.length() == 0 || will.equals("o") || will.equals("O"));
+        } while (continu);
     }
     
     

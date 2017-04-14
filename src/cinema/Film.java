@@ -19,11 +19,11 @@ import java.util.Locale;
  */
 public class Film implements java.io.Serializable, Comparable<Film> {
     
-    private String		    nomFilm;
-    private String		    realisateur;
-    private static final DateFormat DF	    = new SimpleDateFormat("dd/mm/yyyy", Locale.FRANCE);
+    private String                  nomFilm;
+    private String                  realisateur;
+    private static final DateFormat DF      = new SimpleDateFormat("dd/mm/yyyy", Locale.FRANCE);
     private static final DateFormat DF_SHOW = new SimpleDateFormat("d MMMM, yyyy", Locale.FRANCE);
-    private Date		    dateSortie;
+    private Date                    dateSortie;
     /**
      * nomRole, Role
      */
@@ -31,12 +31,12 @@ public class Film implements java.io.Serializable, Comparable<Film> {
     
     
     public Film(String nomFilm, Acteur acteur, String role, String realisateur, Date dateSortie) {
-	setRoles(new HashMap<>());
-	setNomFilm(nomFilm);
-	setRealisateur(realisateur);
-	setDateSortie(dateSortie);
-	
-	addRole(new Role(this, role, acteur));
+        setRoles(new HashMap<>());
+        setNomFilm(nomFilm);
+        setRealisateur(realisateur);
+        setDateSortie(dateSortie);
+        
+        addRole(new Role(this, "* Acteur principal : " + role, acteur));
     }
     
     
@@ -48,8 +48,8 @@ public class Film implements java.io.Serializable, Comparable<Film> {
      * @param role
      */
     public void addRole(Role role) {
-	getRoles().put(role.getNomRole(), role);
-	role.getActeur().addRole(role);
+        getRoles().put(role.getNomRole(), role);
+        role.getActeur().addRole(role);
     }
     
     
@@ -58,7 +58,7 @@ public class Film implements java.io.Serializable, Comparable<Film> {
      */
     @Override
     public int compareTo(Film o) {
-	return getNomFilm().compareTo(o.getNomFilm());
+        return getNomFilm().compareTo(o.getNomFilm());
     }
     
     
@@ -67,19 +67,19 @@ public class Film implements java.io.Serializable, Comparable<Film> {
      */
     @Override
     public String toString() {
-	return getNomFilm() + " par " + getRealisateur() + " sortie en salle le " + DF_SHOW.format(getDateSortie());
+        return getNomFilm() + " par " + getRealisateur() + " sortie en salle le " + DF_SHOW.format(getDateSortie());
     }
     
     
     // -------------------Getters&Setters------------------------
     
     public String getNomFilm() {
-	return nomFilm;
+        return nomFilm;
     }
     
     
     private void setNomFilm(String nomFilm) {
-	this.nomFilm = nomFilm;
+        this.nomFilm = nomFilm;
     }
     
     
@@ -87,7 +87,7 @@ public class Film implements java.io.Serializable, Comparable<Film> {
      * @return the realisateur
      */
     public String getRealisateur() {
-	return realisateur;
+        return realisateur;
     }
     
     
@@ -96,7 +96,7 @@ public class Film implements java.io.Serializable, Comparable<Film> {
      * the realisateur to set
      */
     private void setRealisateur(String realisateur) {
-	this.realisateur = realisateur;
+        this.realisateur = realisateur;
     }
     
     
@@ -104,7 +104,7 @@ public class Film implements java.io.Serializable, Comparable<Film> {
      * @return the dateSortie
      */
     public Date getDateSortie() {
-	return dateSortie;
+        return dateSortie;
     }
     
     
@@ -113,7 +113,7 @@ public class Film implements java.io.Serializable, Comparable<Film> {
      * the dateSortie to set
      */
     private void setDateSortie(Date dateSortie) {
-	this.dateSortie = dateSortie;
+        this.dateSortie = dateSortie;
     }
     
     
@@ -121,7 +121,7 @@ public class Film implements java.io.Serializable, Comparable<Film> {
      * @return the roles
      */
     public HashMap<String, Role> getRoles() {
-	return roles;
+        return roles;
     }
     
     
@@ -130,7 +130,7 @@ public class Film implements java.io.Serializable, Comparable<Film> {
      * the roles to set
      */
     public void setRoles(HashMap<String, Role> roles) {
-	this.roles = roles;
+        this.roles = roles;
     }
     
 }

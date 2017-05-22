@@ -7,3 +7,4 @@ ${test.src.dir}
 test
 build/
 src/films\.db
+nb-build.xml
